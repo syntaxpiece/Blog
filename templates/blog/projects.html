@@ -1,0 +1,60 @@
+{% extends 'extends/base.html' %} {% load static %} {% block title %} Projects
+{%endblock%} {% block content %}
+
+<section class="container main">
+  <div class="row d-flex align-items-center flex-row-reverse">
+    <div class="col-md-8 text-md-end text-center p-4">
+      {% if user.is_authenticated %}
+      <h4 class="welcome-text">
+        مشاريع في
+        <span class="text-muted fw-bold">{{ user.username }}</span> مرحباً بك
+      </h4>
+      {% else %}
+      <h4 class="welcome-text">مرحباً بك في مشاريع</h4>
+      {% endif %}
+      <h2 class="brand-name">Syntax Piece</h2>
+      <div class="p-text">
+        <p class="text-end">
+          ستجد هنا كافة المشاريع البرمجية التي اشرفت عليها المنصة مع وجود
+          التقنية المستعملة في كل مشروع
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4 text-md-start text-center">
+      <img src="{% static 'img/logo11.png' %}" class="logo-img" alt="Logo" />
+    </div>
+  </div>
+</section>
+
+<section class="blog text-center" dir="rtl">
+  <h1>أحدث المشاريع</h1>
+  <div class="container">
+    <div class="row g-4">
+      {% for project in projects %}
+      <div class="col-md-4">
+        <div class="blog-card">
+          <img src="{{project.image.url}}" alt="صورة المقال" />
+          <h2>{{project.title}}</h2>
+          <p>{{project.description}}</p>
+          <a href="{{project.link}}" class="btn btn-primary">اقرأ المزيد</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% if quote %}
+<section class="container main" dir="rtl">
+  <div class="row d-flex align-items-center flex-row-reverse">
+    <div class="text-center p-4">
+      <div class="p-text">
+        <h2>
+          <q> {{quote.quote}} </q>
+        </h2>
+        <p class="text-muted fs-5 fw-bold mt-5" dir="ltr">- {{quote.author}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %} {% endblock %}
